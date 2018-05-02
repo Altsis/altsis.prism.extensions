@@ -82,14 +82,16 @@ namespace Altsis.Prism.Extensions.Regions
         /// <param name="navigationParameters">An instance of NavigationParameters, which holds a collection of object parameters.</param>
         public static void RequestNavigate(this IRegionManager regionManager, string regionName, Uri target, Action<NavigationResult> navigationCallback, NavigationParameters navigationParameters, IUnityContainer container)
         {
-            if (regionManager == null)
-            {
-                return;
-            }
+            if (navigationCallback == null)
+                throw new ArgumentNullException(nameof(navigationCallback));
 
             if (regionManager.Regions.ContainsRegionWithName(regionName))
             {
                 regionManager.Regions[regionName].RequestNavigate(target, navigationCallback, navigationParameters, container);
+            }
+            else
+            {
+                navigationCallback(new NavigationResult(new NavigationContext(null, target, navigationParameters), false));
             }
         }
 

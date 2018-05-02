@@ -9,16 +9,29 @@ namespace Altsis.Prism.Extensions.Regions
     /// </summary>
     public static class RegionExtensions
     {
-        public static void RequestNavigate(this IRegion region,
-    Uri target, Action<NavigationResult> navigationCallback,
-    IUnityContainer container)
+        /// <summary>
+        /// Extends IRegion to allow navigation with deidcated unity container
+        /// </summary>
+        /// <param name="region"></param>
+        /// <param name="target"></param>
+        /// <param name="navigationCallback"></param>
+        /// <param name="container"></param>
+        public static void RequestNavigate(this IRegion region, Uri target, Action<NavigationResult> navigationCallback, 
+            IUnityContainer container)
         {
             RequestNavigate(region, target, navigationCallback, null, container);
         }
 
-        public static void RequestNavigate(this IRegion region,
-Uri target, Action<NavigationResult> navigationCallback, NavigationParameters navigationParameters,
-IUnityContainer container)
+        /// <summary>
+        /// Extends IRegion to allow navigation with deidcated unity container
+        /// </summary>
+        /// <param name="region"></param>
+        /// <param name="target"></param>
+        /// <param name="navigationCallback"></param>
+        /// <param name="navigationParameters"></param>
+        /// <param name="container"></param>
+        public static void RequestNavigate(this IRegion region, Uri target, Action<NavigationResult> navigationCallback, 
+            NavigationParameters navigationParameters, IUnityContainer container)
         {
             CustomRegionNavigationService customRegionNavigationService = region.NavigationService as CustomRegionNavigationService;
             if (customRegionNavigationService == null)

@@ -20,7 +20,7 @@ namespace Altsis.Prism.Extensions.Regions
         private IRegionNavigationJournal journal;
         private NavigationContext currentNavigationContext;
 
-        #region PRISM Library Code
+        #region PRISM Library code
         /// <summary>
         /// Initializes a new instance of the <see cref="RegionNavigationService"/> class.
         /// </summary>
@@ -30,19 +30,13 @@ namespace Altsis.Prism.Extensions.Regions
         public CustomRegionNavigationService(IServiceLocator serviceLocator, IRegionNavigationContentLoader regionNavigationContentLoader, IRegionNavigationJournal journal)
         {
             if (serviceLocator == null)
-            {
-                throw new ArgumentNullException("serviceLocator");
-            }
+                throw new ArgumentNullException(nameof(serviceLocator));
 
             if (regionNavigationContentLoader == null)
-            {
-                throw new ArgumentNullException("regionNavigationContentLoader");
-            }
+                throw new ArgumentNullException(nameof(regionNavigationContentLoader));
 
             if (journal == null)
-            {
-                throw new ArgumentNullException("journal");
-            }
+                throw new ArgumentNullException(nameof(journal));
 
             this.serviceLocator = serviceLocator;
             this.regionNavigationContentLoader = regionNavigationContentLoader;
@@ -126,7 +120,8 @@ namespace Altsis.Prism.Extensions.Regions
         /// <param name="navigationParameters">The navigation parameters specific to the navigation request.</param>
         public void RequestNavigate(Uri target, Action<NavigationResult> navigationCallback, NavigationParameters navigationParameters)
         {
-            if (navigationCallback == null) throw new ArgumentNullException("navigationCallback");
+            if (navigationCallback == null)
+                throw new ArgumentNullException(nameof(navigationCallback));
 
             try
             {
@@ -141,14 +136,10 @@ namespace Altsis.Prism.Extensions.Regions
         private void DoNavigate(Uri source, Action<NavigationResult> navigationCallback, NavigationParameters navigationParameters)
         {
             if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
+                throw new ArgumentNullException(nameof(source));
 
             if (this.Region == null)
-            {
                 throw new InvalidOperationException("Navigation cannot proceed until a region is set for the RegionNavigationService.");
-            }
 
             this.currentNavigationContext = new NavigationContext(this, source, navigationParameters);
 
@@ -307,7 +298,7 @@ namespace Altsis.Prism.Extensions.Regions
                 MvvmHelpers.ViewAndViewModelAction(item, invocation);
             }
         }
-        #endregion
+#endregion
 
         /// <summary>
         /// Initiates navigation to the specified target.
@@ -332,14 +323,10 @@ namespace Altsis.Prism.Extensions.Regions
         private void DoNavigate(Uri source, Action<NavigationResult> navigationCallback, NavigationParameters navigationParameters, IUnityContainer container)
         {
             if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
+                throw new ArgumentNullException(nameof(source));
 
             if (this.Region == null)
-            {
                 throw new InvalidOperationException("Navigation cannot proceed until a region is set for the RegionNavigationService.");
-            }
 
             this.currentNavigationContext = new NavigationContext(this, source, navigationParameters);
 
